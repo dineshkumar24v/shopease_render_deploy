@@ -10,16 +10,124 @@ const users = [
   {
     username: "admin",
     email: "admin@shopease.com",
-    password: "admin123",
+    password: "admin1234",
     role: "admin",
   },
   {
     username: "john_doe",
     email: "john@example.com",
-    password: "password123",
+    password: "password1234",
     role: "user",
   },
 ];
+
+// const products = [
+//   {
+//     name: "Wireless Bluetooth Headphones",
+//     description:
+//       "Premium wireless headphones with active noise cancellation and 30-hour battery life.",
+//     price: 199.99,
+//     category: "Electronics",
+//     stock_quantity: 50,
+//     brand: "AudioTech",
+//     images: ["https://via.placeholder.com/400x400?text=Headphones"],
+//     featured: true,
+//   },
+//   {
+//     name: "Smart Fitness Watch",
+//     description:
+//       "Track your fitness goals with heart rate monitoring, GPS, and sleep tracking.",
+//     price: 299.99,
+//     category: "Electronics",
+//     stock_quantity: 30,
+//     brand: "FitGear",
+//     images: ["https://via.placeholder.com/400x400?text=Smart+Watch"],
+//     featured: true,
+//   },
+//   {
+//     name: "Organic Cotton T-Shirt",
+//     description:
+//       "Comfortable and sustainable organic cotton t-shirt in multiple colors.",
+//     price: 29.99,
+//     category: "Clothing",
+//     stock_quantity: 100,
+//     brand: "EcoWear",
+//     images: ["https://via.placeholder.com/400x400?text=T-Shirt"],
+//   },
+//   {
+//     name: "Yoga Mat Premium",
+//     description:
+//       "Non-slip yoga mat with extra cushioning for comfort during your practice.",
+//     price: 49.99,
+//     category: "Sports",
+//     stock_quantity: 75,
+//     brand: "YogaPro",
+//     images: ["https://via.placeholder.com/400x400?text=Yoga+Mat"],
+//   },
+//   {
+//     name: "LED Desk Lamp",
+//     description:
+//       "Adjustable LED desk lamp with multiple brightness levels and USB charging port.",
+//     price: 39.99,
+//     category: "Home & Garden",
+//     stock_quantity: 60,
+//     brand: "BrightHome",
+//     images: ["https://via.placeholder.com/400x400?text=Desk+Lamp"],
+//   },
+//   {
+//     name: "Stainless Steel Water Bottle",
+//     description:
+//       "Insulated water bottle keeps drinks cold for 24 hours or hot for 12 hours.",
+//     price: 24.99,
+//     category: "Sports",
+//     stock_quantity: 120,
+//     brand: "HydroFlask",
+//     images: ["https://via.placeholder.com/400x400?text=Water+Bottle"],
+//     featured: true,
+//   },
+//   {
+//     name: "Programming Book Bundle",
+//     description:
+//       "Complete guide to modern web development with JavaScript, React, and Node.js.",
+//     price: 79.99,
+//     category: "Books",
+//     stock_quantity: 40,
+//     brand: "TechPress",
+//     images: ["https://via.placeholder.com/400x400?text=Book+Bundle"],
+//   },
+//   {
+//     name: "Wireless Gaming Mouse",
+//     description:
+//       "High-precision gaming mouse with customizable RGB lighting and programmable buttons.",
+//     price: 69.99,
+//     category: "Electronics",
+//     stock_quantity: 45,
+//     brand: "GamePro",
+//     images: ["https://via.placeholder.com/400x400?text=Gaming+Mouse"],
+//   },
+//   {
+//     name: "Aromatherapy Diffuser",
+//     description:
+//       "Ultrasonic essential oil diffuser with LED mood lighting and auto shut-off.",
+//     price: 34.99,
+//     category: "Home & Garden",
+//     stock_quantity: 80,
+//     brand: "ZenHome",
+//     images: ["https://via.placeholder.com/400x400?text=Diffuser"],
+//   },
+//   {
+//     name: "Resistance Bands Set",
+//     description:
+//       "Complete set of resistance bands for strength training and physical therapy.",
+//     price: 19.99,
+//     category: "Sports",
+//     stock_quantity: 90,
+//     brand: "FitnessPro",
+//     images: ["https://via.placeholder.com/400x400?text=Resistance+Bands"],
+//   },
+// ];
+
+// Connect to database
 
 const products = [
   {
@@ -30,7 +138,7 @@ const products = [
     category: "Electronics",
     stock_quantity: 50,
     brand: "AudioTech",
-    images: ["https://via.placeholder.com/400x400?text=Headphones"],
+    images: ["http://localhost:5000/images/product10.jpg"],
     featured: true,
   },
   {
@@ -41,7 +149,7 @@ const products = [
     category: "Electronics",
     stock_quantity: 30,
     brand: "FitGear",
-    images: ["https://via.placeholder.com/400x400?text=Smart+Watch"],
+    images: ["http://localhost:5000/images/product5.jpg"],
     featured: true,
   },
   {
@@ -52,7 +160,7 @@ const products = [
     category: "Clothing",
     stock_quantity: 100,
     brand: "EcoWear",
-    images: ["https://via.placeholder.com/400x400?text=T-Shirt"],
+    images: ["http://localhost:5000/images/product6.jpg"],
   },
   {
     name: "Yoga Mat Premium",
@@ -62,7 +170,7 @@ const products = [
     category: "Sports",
     stock_quantity: 75,
     brand: "YogaPro",
-    images: ["https://via.placeholder.com/400x400?text=Yoga+Mat"],
+    images: ["http://localhost:5000/images/product7.webp"],
   },
   {
     name: "LED Desk Lamp",
@@ -72,7 +180,7 @@ const products = [
     category: "Home & Garden",
     stock_quantity: 60,
     brand: "BrightHome",
-    images: ["https://via.placeholder.com/400x400?text=Desk+Lamp"],
+    images: ["http://localhost:5000/images/product8.jpg"],
   },
   {
     name: "Stainless Steel Water Bottle",
@@ -82,7 +190,7 @@ const products = [
     category: "Sports",
     stock_quantity: 120,
     brand: "HydroFlask",
-    images: ["https://via.placeholder.com/400x400?text=Water+Bottle"],
+    images: ["http://localhost:5000/images/product9.webp"],
     featured: true,
   },
   {
@@ -93,7 +201,7 @@ const products = [
     category: "Books",
     stock_quantity: 40,
     brand: "TechPress",
-    images: ["https://via.placeholder.com/400x400?text=Book+Bundle"],
+    images: ["http://localhost:5000/images/product1.jpg"],
   },
   {
     name: "Wireless Gaming Mouse",
@@ -103,7 +211,7 @@ const products = [
     category: "Electronics",
     stock_quantity: 45,
     brand: "GamePro",
-    images: ["https://via.placeholder.com/400x400?text=Gaming+Mouse"],
+    images: ["http://localhost:5000/images/product2.jpg"],
   },
   {
     name: "Aromatherapy Diffuser",
@@ -113,7 +221,7 @@ const products = [
     category: "Home & Garden",
     stock_quantity: 80,
     brand: "ZenHome",
-    images: ["https://via.placeholder.com/400x400?text=Diffuser"],
+    images: ["http://localhost:5000/images/product3.jpg"],
   },
   {
     name: "Resistance Bands Set",
@@ -123,15 +231,11 @@ const products = [
     category: "Sports",
     stock_quantity: 90,
     brand: "FitnessPro",
-    images: ["https://via.placeholder.com/400x400?text=Resistance+Bands"],
+    images: ["http://localhost:5000/images/product4.webp"],
   },
 ];
 
-// Connect to database
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGODB_URI);
 
 // Seed function
 const seedDatabase = async () => {
@@ -140,6 +244,11 @@ const seedDatabase = async () => {
     await User.deleteMany();
     await Product.deleteMany();
     console.log("🗑️  Cleared existing data");
+
+    // Hash passwords before inserting users
+    for (let user of users) {
+      user.password = await bcrypt.hash(user.password, 10);
+    }
 
     // Insert users
     const createdUsers = await User.insertMany(users);
