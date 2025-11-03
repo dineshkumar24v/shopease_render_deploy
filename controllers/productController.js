@@ -1,7 +1,5 @@
 const path = require("path");
-require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
-console.log("✅ ENV TEST:", process.env.CLOUDINARY_NAME, process.env.CLOUDINARY_KEY ? "Loaded" : "Missing");
-
+require("dotenv").config();
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
@@ -16,11 +14,6 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_KEY,
   api_secret: process.env.CLOUDINARY_SECRET,
 });
-
-console.log(
-  "CLOUDINARY CONFIG:",
-  process.env.CLOUDINARY_NAME ? "✅ Loaded" : "❌ Missing"
-);
 
 // @desc    Get all products with filtering, sorting, and pagination
 // @route   GET /api/products
