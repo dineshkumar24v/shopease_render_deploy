@@ -1,4 +1,26 @@
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
+console.log("✅ ENV TEST:", process.env.CLOUDINARY_NAME, process.env.CLOUDINARY_KEY ? "Loaded" : "Missing");
+
+const multer = require("multer");
+const cloudinary = require("cloudinary").v2;
+const fs = require("fs");
 const Product = require("../models/Product");
+
+// Multer setup (temporary storage)
+const upload = multer({ dest: "uploads/" });
+
+// Cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
+
+console.log(
+  "CLOUDINARY CONFIG:",
+  process.env.CLOUDINARY_NAME ? "✅ Loaded" : "❌ Missing"
+);
 
 // @desc    Get all products with filtering, sorting, and pagination
 // @route   GET /api/products
@@ -111,7 +133,20 @@ exports.getProduct = async (req, res) => {
 // @access  Private/Admin
 exports.createProduct = async (req, res) => {
   try {
-    const product = await Product.create(req.body);
+    let images = [];
+
+    if (req.files && req.files.length > 0) {
+      for (const file of req.files) {
+        const result = await cloudinary.uploader.upload(file.path);
+        images.push(result.secure_url);
+        fs.unlinkSync(file.path); // remove temp file
+      }
+    }
+
+    const product = await Product.create({
+      ...req.body,
+      images, // Cloudinary URLs here
+    });
 
     res.status(201).json({
       success: true,
@@ -131,7 +166,17 @@ exports.createProduct = async (req, res) => {
 // @access  Private/Admin
 exports.updateProduct = async (req, res) => {
   try {
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    const { id } = req.params;
+
+    // Prepare updated fields
+    const updates = { ...req.body };
+
+    // If a new image is uploaded, overwrite the old one
+    if (req.file) {
+      updates.image = req.file.path;
+    }
+
+    const product = await Product.findByIdAndUpdate(id, updates, {
       new: true,
       runValidators: true,
     });
@@ -168,6 +213,13 @@ exports.deleteProduct = async (req, res) => {
         success: false,
         message: "Product not found",
       });
+    }
+
+    // 🔹 OPTIONAL: Delete image from Cloudinary if you ever do hard deletes
+    // Extract the public_id from the Cloudinary URL (if stored)
+    if (product.image) {
+      const publicId = product.image.split("/").pop().split(".")[0];
+      await cloudinary.uploader.destroy(`mern_products/${publicId}`);
     }
 
     // Soft delete - just mark as inactive
