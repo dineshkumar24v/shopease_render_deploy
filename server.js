@@ -7,7 +7,10 @@ require("dotenv").config();
 
 const app = express();
 
-// Security Middleware
+// images
+app.use("/images", express.static("public/images"));
+
+// // Security Middleware
 app.use(helmet());
 app.use(
   cors({
@@ -15,6 +18,35 @@ app.use(
     credentials: true,
   })
 );
+
+// Security Middleware
+app.use(helmet());
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://shopease-frontend-dun.vercel.app", // your deployed frontend
+];
+
+// ✅ Enhanced CORS setup
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow non-browser clients (Postman, mobile apps)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      // IMPORTANT: do not throw an error
+      return callback(null, false);
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 
 // Rate limiting
 const limiter = rateLimit({
@@ -29,10 +61,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Database connection
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
