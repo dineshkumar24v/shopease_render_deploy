@@ -10,15 +10,6 @@ const app = express();
 // images
 app.use("/images", express.static("public/images"));
 
-// // Security Middleware
-app.use(helmet());
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
-    credentials: true,
-  })
-);
-
 // Security Middleware
 app.use(helmet());
 
@@ -44,16 +35,18 @@ app.use(
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  })
+  }),
 );
 
+// This ensures preflight OPTIONS requests always succeed without CORS errors
+app.options("*", cors()); // Enable pre-flight across-the-board
 
 // Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-});
-app.use("/api/", limiter);
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 100, // limit each IP to 100 requests per windowMs
+// });
+// app.use("/api/", limiter);
 
 // Body parser middleware
 app.use(express.json());
