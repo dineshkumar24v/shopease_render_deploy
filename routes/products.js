@@ -13,8 +13,8 @@ const { protect, authorize } = require("../middleware/auth");
 
 // Public routes
 router.get("/", getProducts);
-router.get("/categories/list", getCategories);
-router.get("/brands/list", getBrands);
+router.get("/categories", getCategories);
+router.get("/brands", getBrands);
 router.get("/:id", getProduct);
 
 // Admin routes
