@@ -38,9 +38,6 @@ app.use(
   }),
 );
 
-// This ensures preflight OPTIONS requests always succeed without CORS errors
-app.options("*", cors()); // Enable pre-flight across-the-board
-
 // Rate limiting
 // const limiter = rateLimit({
 //   windowMs: 15 * 60 * 1000, // 15 minutes
